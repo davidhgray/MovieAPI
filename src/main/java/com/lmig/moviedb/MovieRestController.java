@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MovieRestController {
+	@Autowired
+	private MovieRepository movieRepository;
+
 	@RequestMapping(path = "/api/Movie", method = RequestMethod.GET)
 	public Movie movie(String movie, Integer year, String genre, String rating, Integer score, String language,
 			String person) {
@@ -59,7 +63,7 @@ public class MovieRestController {
 
 		ArrayList<Person> personArray = new ArrayList<Person>();
 		ArrayList<Person> resultArray = new ArrayList<Person>();
-		
+
 		System.out.println("ok1");
 		// String about="";
 		personArray.add(new Person("ravi", "Seattle", "male", 5, "ravi is going to gfc"));
@@ -71,4 +75,13 @@ public class MovieRestController {
 		return personArray;
 	}
 
+	@RequestMapping(value = "/api/addMovie", method = RequestMethod.POST)
+	public void addMovie(@RequestBody Movie movie) {
+		movieRepository.save(movie);
+
+//		personArray.add(new Person(person.getName(), "indy", "male", 5, "ravi is going to gfc"));
+//		personArray.add(new Person(personName, "indy", "male", 5, "ravi is going to gfc"));
+//		System.out.println(resultArray.toString());
+//		return personArray;
+	}
 }

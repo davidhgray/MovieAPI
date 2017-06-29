@@ -1,7 +1,19 @@
 package com.lmig.moviedb;
 
+import java.io.Serializable;
 
-public class Movie {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "movie")
+public class Movie implements Serializable {
+	@Id
+	@GeneratedValue
+	int id;
+
 	String movie;
 	int year;
 	String genre;
@@ -10,7 +22,8 @@ public class Movie {
 	String language;
 	String person;
 
-
+	public Movie() {}
+//id is included here so it can be accessed in Java class
     public Movie(String movie, int year, String genre, String rating, int score, String language, String person) {
     	this.movie= movie;
     	this.year=year;
@@ -21,6 +34,15 @@ public class Movie {
     	this.person=person;
 
     }
+    
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
     public String getMovie() {
 		return movie;
 	}
