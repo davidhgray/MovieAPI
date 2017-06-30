@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.lmig.moviedb.MovieRepository;
 
 //import com.google.gson.Gson;
 
@@ -24,7 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovieRestController {
 	@Autowired
 	private MovieRepository movieRepository;
-
+	
+	@Autowired
+	private PersonRepository personRepository;
+	
+//TODO do we need this route anymore? 	
 	@RequestMapping(path = "/api/Movie", method = RequestMethod.GET)
 	public Movie movie(String movie, Integer year, String genre, String rating, Integer score, String language,
 			String person) {
@@ -63,6 +68,7 @@ public class MovieRestController {
 		return resultArray;
 	}
 
+//	TODO do we need this route anymore?
 	@RequestMapping(value = "/api/AddPerson", method = RequestMethod.POST)
 	public ArrayList<Person> add(@RequestBody Person person, String personName) {
 
@@ -78,6 +84,11 @@ public class MovieRestController {
 		personArray.add(new Person(personName, "indy", "male", 5, "ravi is going to gfc"));
 		System.out.println(resultArray.toString());
 		return personArray;
+	}
+
+	@RequestMapping(value = "/api/addPerson", method = RequestMethod.POST)
+	public void addPerson(@RequestBody Person person) {
+		personRepository.save(person);
 	}
 
 	@RequestMapping(value = "/api/addMovie", method = RequestMethod.POST)
@@ -135,11 +146,21 @@ public class MovieRestController {
 
 	}
 
+//	Get Person using @Query
+	@RequestMapping(value = "/api/getPersonQuery2", method = RequestMethod.GET)
+	public List<Person> getPersonQuery(@RequestParam(defaultValue = "") String name,
+			@RequestParam(defaultValue = "0") Integer popScore, @RequestParam(defaultValue = "") String birthPlace,
+			@RequestParam(defaultValue = "") String gender) {
+		List<Person> result = new ArrayList<>();
+		result = personRepository.search(name, popScore, birthPlace, gender);
+		return result;
+	}
+	
 	// Get function using @Query.
 	@RequestMapping(value = "/api/getMovieQuery2", method = RequestMethod.GET)
 	public List<Movie> getMovieQuery(@RequestParam(defaultValue = "") String movie,
 			@RequestParam(defaultValue = "0") Integer year, @RequestParam(defaultValue = "") String rating,
-			@RequestParam(defaultValue = "") String score, @RequestParam(defaultValue = "") String genre,
+			@RequestParam(defaultValue = "0") Integer score, @RequestParam(defaultValue = "") String genre,
 			@RequestParam(defaultValue = "") String language) {
 		// @Param("movie") String movie,@Param("year") String
 		// year,@Param("rating") String rating,@Param("score") String
@@ -180,8 +201,8 @@ public class MovieRestController {
 		// Movie m = result.get(i);
 		// System.out.println(m.language);
 		// }
-//		result = movieRepository.search(movie, year, rating, score, genre, language);
-		result = movieRepository.search(movie, year, rating);
+		result = movieRepository.search(movie, year, rating, score, genre, language);
+		// result = movieRepository.search(movie, year, rating);
 		System.out.println("result" + result);
 		return result;
 	}

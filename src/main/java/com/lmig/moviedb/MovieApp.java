@@ -11,6 +11,9 @@ public class MovieApp {
 
 	@Autowired
 	private MovieRepository movieRepository;
+	
+	@Autowired
+	private PersonRepository personRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieApp.class, args);

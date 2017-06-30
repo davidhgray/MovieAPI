@@ -1,11 +1,19 @@
 package com.lmig.moviedb;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+
+
 
 @Entity
 @Table(name = "movie")
@@ -21,10 +29,16 @@ public class Movie implements Serializable {
 	int score;
 	String language;
 	String person;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	private Set<Person> persons;
 
-	public Movie() {}
-//id is included here so it can be accessed in Java class
+	public Movie() {
+		this.persons = new HashSet<Person>();
+	}
+
     public Movie(String movie, int year, String genre, String rating, int score, String language, String person) {
+    	this();
     	this.movie= movie;
     	this.year=year;
     	this.genre=genre;
@@ -99,4 +113,14 @@ public class Movie implements Serializable {
 		this.person = person;
 	}
 
+//	@ManyToMany(cascade=CascadeType.ALL)
+//	@JoinTable(name="person_movie", joinColumns=@JoinColumn(name="id"), inverseJoinColumns=@JoinColumn(name="id"))
+    public Set<Person> getPersons()  
+    {  
+        return persons;  
+    }  
+    public void setPersons(Set<Person> persons)  
+    {  
+        this.persons = persons;  
+    }  
 }

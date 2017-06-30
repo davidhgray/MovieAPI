@@ -1,6 +1,8 @@
+//this repository was copied from the MovieRepository.java class that existed first
+
 package com.lmig.moviedb;
 
-import com.lmig.moviedb.Movie;
+import com.lmig.moviedb.Person;
 
 import java.util.List;
 
@@ -8,33 +10,31 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface MovieRepository extends JpaRepository<Movie, Integer> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 	// @Query("SELECT m FROM Movie m WHERE m.movie = :movie")
 	//// public String find(@Param("movie") String movie);
 	// List<Movie> find(@Param("movie") String movie);
 	//// return m;
-	List<Movie> findByGenre(String genre);
+	List<Person> findByBirthPlace(String birthPlace);
 
-	List<Movie> findByMovie(String movie);
+	List<Person> findByGender(String gender);
 
-	List<Movie> findByLanguage(String language);
+	List<Person> findByName(String name);
 
-	List<Movie> findByMovieAndGenre(String movie, String genre);
+//	List<Person> findByPopScore(Integer popScore);
 
-	List<Movie> findByGenreAndLanguage(String genre, String language);
+//	List<Person> findByGenreAndLanguage(String genre, String language);
 	// List<Movie> findByIdOrMovieOrYearOrRatingOrScoreOrGenreOrLanguage(Integer
 	// Id, String Movie, Integer Year, String Rating, Integer Score, String
 	// Genre, String Language);
-
-	@Query("SELECT m FROM Movie m WHERE m.movie LIKE CONCAT('%', :movie, '%') "
-			+ " AND (0 = :year OR m.year = :year) "
-			+ " AND ('' = :rating OR m.rating = :rating) "
-			+ " AND (0 = :score OR m.score = :score) "
-			+ " AND ('' = :genre OR m.genre = :genre) "
-			+ " AND ('' = :language OR language = :language)"
+	
+	@Query("SELECT p FROM Person p WHERE p.name LIKE CONCAT('%', :name, '%') "
+			+ " AND (0 = :popScore OR p.popScore = :popScore) "
+			+ " AND ('' = :birthPlace OR p.birthPlace = :birthPlace) "
+			+ " AND ('' = :gender OR p.gender = :gender) "
 			)
 //	List<Movie> search(@Param("movie") String Movie, @Param("year") Integer Year, @Param("rating") String Rating);
-	List<Movie> search(@Param("movie") String Movie, @Param("year") Integer Year, @Param("rating") String Rating, @Param("score") Integer Score, @Param("genre") String Genre, @Param("language") String Language);
+	List<Person> search(@Param("name") String Name, @Param("popScore") Integer PopScore, @Param("birthPlace") String BirthPlace, @Param("gender") String Gender);
 //	List<Movie> search(@Param("movie") String Movie, @Param("movie") Integer Year, @Param("movie") String Rating,
 //			@Param("score") String Score, @Param("genre") String Genre, @Param("language") String Language);
 }
