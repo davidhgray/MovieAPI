@@ -15,9 +15,12 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	//// public String find(@Param("movie") String movie);
 	// List<Movie> find(@Param("movie") String movie);
 	//// return m;
-	List<Person> findByBirthPlace(String birthPlace);
+	
+	Person findById(Integer id);
+	
+//	List<Person> findByBirthPlace(String birthPlace);
 
-	List<Person> findByGender(String gender);
+//	List<Person> findByGender(String gender);
 
 	List<Person> findByName(String name);
 
@@ -29,12 +32,16 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	// Genre, String Language);
 	
 	@Query("SELECT p FROM Person p WHERE p.name LIKE CONCAT('%', :name, '%') "
-			+ " AND (0 = :popScore OR p.popScore = :popScore) "
-			+ " AND ('' = :birthPlace OR p.birthPlace = :birthPlace) "
-			+ " AND ('' = :gender OR p.gender = :gender) "
+//			+ " AND (0 = :popScore OR p.popScore = :popScore) "
+//			+ " AND ('' = :birthPlace OR p.birthPlace = :birthPlace) "
+//			+ " AND ('' = :gender OR p.gender = :gender) "
 			)
 //	List<Movie> search(@Param("movie") String Movie, @Param("year") Integer Year, @Param("rating") String Rating);
-	List<Person> search(@Param("name") String Name, @Param("popScore") Integer PopScore, @Param("birthPlace") String BirthPlace, @Param("gender") String Gender);
+	
+//	old version
+//	List<Person> search(@Param("name") String Name, @Param("popScore") Integer PopScore, @Param("birthPlace") String BirthPlace, @Param("gender") String Gender);
+//	new version
+	List<Person> search(@Param("name") String Name);
 //	List<Movie> search(@Param("movie") String Movie, @Param("movie") Integer Year, @Param("movie") String Rating,
 //			@Param("score") String Score, @Param("genre") String Genre, @Param("language") String Language);
 }

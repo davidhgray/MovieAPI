@@ -18,25 +18,26 @@ public class Person implements Serializable {
 	int id;
 
 	String name;
-	String birthPlace;
-	String gender;
-	Integer popScore;
-	String about;
+//	String birthPlace;
+//	String gender;
+//	Integer popScore;
+//	String about;
 
-	@ManyToMany(mappedBy = "persons")
-	private Set<Movie> movies;
+//	@ManyToMany(mappedBy = "persons")
+//	private Set<Movie> movies;
 
 	public Person() {
-		this.movies = new HashSet<Movie>();
+//		this.movies = new HashSet<Movie>();
 	}
 
-	public Person(String name, String birthPlace, String gender, Integer popScore, String about) {
+//	public Person(String name, String birthPlace, String gender, Integer popScore, String about) {
+	public Person(String name) {
 		this();
 		this.name = name;
-		this.birthPlace = birthPlace;
-		this.gender = gender;
-		this.popScore = popScore;
-		this.about = about;
+//		this.birthPlace = birthPlace;
+//		this.gender = gender;
+//		this.popScore = popScore;
+//		this.about = about;
 	}
 
 	public int getId() {
@@ -55,44 +56,61 @@ public class Person implements Serializable {
 		this.name = name;
 	}
 
-	public String getBirthPlace() {
-		return birthPlace;
-	}
-
-	public void setBirthPlace(String birthPlace) {
-		this.birthPlace = birthPlace;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public Integer getPopScore() {
-		return popScore;
-	}
-
-	public void setPopScore(Integer popScore) {
-		this.popScore = popScore;
-	}
-
-	public String getAbout() {
-		return about;
-	}
-
-	public void setAbout(String about) {
-		this.about = about;
-	}
-
-	public Set<Movie> getMovies() {
-		return movies;
-	}
-
-	public void setMovies(Set<Movie> movies) {
-		this.movies = movies;
-	}
-
+//	public String getBirthPlace() {
+//		return birthPlace;
+//	}
+//
+//	public void setBirthPlace(String birthPlace) {
+//		this.birthPlace = birthPlace;
+//	}
+//
+//	public String getGender() {
+//		return gender;
+//	}
+//
+//	public void setGender(String gender) {
+//		this.gender = gender;
+//	}
+//
+//	public Integer getPopScore() {
+//		return popScore;
+//	}
+//
+//	public void setPopScore(Integer popScore) {
+//		this.popScore = popScore;
+//	}
+//
+//	public String getAbout() {
+//		return about;
+//	}
+//
+//	public void setAbout(String about) {
+//		this.about = about;
+//	}
+//
+//	public Set<Movie> getMovies() {
+//		return movies;
+//	}
+//
+//	public void setMovies(Set<Movie> movies) {
+//		this.movies = movies;
+//	}
+    //PUT method
+    public void merge(Person other) {
+        if (other.name != null) {
+            this.name = other.name;
+        }
+//        if (other.about != null){
+//            this.about=other.about;
+//        }
+//        if (other.birthPlace != null){
+//            this.birthPlace=other.birthPlace;
+//        }
+//        if (other.gender != null){
+//            this.gender=other.gender;
+//        }
+//        if (other.popScore != null){
+//            this.popScore=other.popScore;
+//        }
+    }
 }

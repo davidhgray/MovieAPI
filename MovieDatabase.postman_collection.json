@@ -1,0 +1,51 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MovieDatabase",
+		"_postman_id": "ac9e4430-1d6a-c354-9a13-57952c98bd16",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/addMovie",
+			"request": {
+				"url": "http://localhost:8080/api/addMovie",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"movie\": \"it\",\n\t\"year\": 1015,\n\t\"genre\": \"comedy\",\n\t\"rating\": \"PG-13\",\n\t\"score\": 9.1,\n\t\"language\": \"english\",\n\t\"persons\": [\n\t {\"name\": \"ravi\"},\n\t {\"name\": \"tracy\"}\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/addPerson",
+			"request": {
+				"url": "http://localhost:8080/api/addPerson",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"charlton heston\",\n\t\"birthPlace\": \"Los Angeles\",\n\t\"gender\": \"Male\",\n\t\"popScore\": 33,\n\t\"about\": \"grew up in a house on a street\",\n\t\"movies\": [\n\t {\"movie\": \"the ten commandments\"},\n\t {\"movie\": \"ben-hur\"}\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -15,7 +15,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	//// return m;
 	List<Movie> findByGenre(String genre);
 
-	List<Movie> findByMovie(String movie);
+	Movie findById(Integer id);
 
 	List<Movie> findByLanguage(String language);
 

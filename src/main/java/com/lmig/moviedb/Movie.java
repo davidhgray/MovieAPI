@@ -2,6 +2,7 @@ package com.lmig.moviedb;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 
 
@@ -18,6 +22,11 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "movie")
 public class Movie implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	int id;
@@ -30,14 +39,17 @@ public class Movie implements Serializable {
 	String language;
 	String person;
 	
+//	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@ManyToMany(cascade=CascadeType.ALL)
-	private Set<Person> persons;
+	@JoinColumn(name="PersonId")
+	private List<Person> persons;
 
+	//keep adding more code like this ManyToMany to add additional roles, one @manytomany for each
 	public Movie() {
-		this.persons = new HashSet<Person>();
+//		this.persons = new HashSet<Person>();
 	}
 
-    public Movie(String movie, int year, String genre, String rating, int score, String language, String person) {
+    public Movie(String movie, Integer year, String genre, String rating, Integer score, String language, String person) {
     	this();
     	this.movie= movie;
     	this.year=year;
@@ -115,12 +127,35 @@ public class Movie implements Serializable {
 
 //	@ManyToMany(cascade=CascadeType.ALL)
 //	@JoinTable(name="person_movie", joinColumns=@JoinColumn(name="id"), inverseJoinColumns=@JoinColumn(name="id"))
-    public Set<Person> getPersons()  
+//    @JsonIgnore
+	public List<Person> getPersons()  
     {  
         return persons;  
     }  
-    public void setPersons(Set<Person> persons)  
+    public void setPersons(List<Person> persons)  
     {  
         this.persons = persons;  
     }  
+    
+    //PUT method
+    public void merge(Movie other) {
+        if (other.movie != null) {
+            this.movie = other.movie;
+        }
+        if (other.genre != null){
+            this.genre=other.genre;
+        }
+        if (other.language != null){
+            this.language=other.language;
+        }
+        if (other.rating != null){
+            this.rating=other.rating;
+        }
+        if (other.year != 0){
+            this.year=other.year;
+        }
+        if (other.score != 0){
+            this.score=other.score;
+        }
+    }
 }
