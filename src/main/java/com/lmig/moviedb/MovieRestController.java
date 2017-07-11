@@ -1,5 +1,6 @@
 package com.lmig.moviedb;
 
+import java.lang.annotation.Repeatable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,11 +24,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.lmig.moviedb.MovieRepository;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.*;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
 
 //import com.google.gson.Gson;
 
 @RestController
+//first customization
+@Api(value="Movie API", description = "Operations for the Movie API")
 public class MovieRestController {
 	@Autowired
 	private MovieRepository movieRepository;
@@ -38,6 +45,15 @@ public class MovieRestController {
 	@Autowired
 	private UserRepository userRepository;
 
+	//second customization
+	@ApiOperation(value = "Add a Person", notes = "Adds a person to the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully added"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	
 	@RequestMapping(value = "/api/addPerson", method = RequestMethod.POST)
 	public HttpStatus addPerson(@RequestBody Person person) {
@@ -48,6 +64,15 @@ public class MovieRestController {
 		return HttpStatus.OK;
 	}
 	
+	@ApiOperation(value = "Adds a User", notes = "Adds a user to the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully added"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
+	
 	@RequestMapping(value = "/api/addUser", method = RequestMethod.POST)
 	public HttpStatus addUser(@RequestBody User user) {
 		if (user == null) {
@@ -56,6 +81,16 @@ public class MovieRestController {
 		userRepository.save(user);
 		return HttpStatus.OK;
 	}
+	
+	//second customization
+	@ApiOperation(value = "Adds a Movie", notes = "Adds a movie to the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully added"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 
 	@RequestMapping(value = "/api/addMovie", method = RequestMethod.POST)
 //	added the @ResponseBody as part of JUnit testing
@@ -69,6 +104,15 @@ public class MovieRestController {
 		return HttpStatus.OK;
 	}
 
+	//second customization
+	@ApiOperation(value = "Updates a Movie", notes = "Updates a movie in the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully updated"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	
     @RequestMapping(path = "/api/putMovie", method = RequestMethod.PUT)
     public ResponseEntity<Movie> updateMovie(@RequestBody Movie m) {  
@@ -83,6 +127,16 @@ public class MovieRestController {
         movieRepository.save(existing);
         return new ResponseEntity<Movie>(existing, HttpStatus.OK);
     }
+	
+	//second customization
+	@ApiOperation(value = "Updates a Person", notes = "Updates a person in the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully updated"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
     
     @RequestMapping(path = "/api/putPerson", method = RequestMethod.PUT)
     public ResponseEntity<Person> updatePerson(@RequestBody Person p) {  
@@ -99,6 +153,16 @@ public class MovieRestController {
         System.out.println("ok 2");
         return new ResponseEntity<Person>(existing, HttpStatus.OK);
     }
+	
+	//second customization
+	@ApiOperation(value = "Updates a User", notes = "Updates a user in the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully updated"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	
     @RequestMapping(path = "/api/putUser", method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@RequestBody User u) {  
@@ -119,7 +183,16 @@ public class MovieRestController {
         System.out.println("ok 2");
         return new ResponseEntity<User>(existing, HttpStatus.OK);
     }
-    
+	
+	//second customization
+	@ApiOperation(value = "Deletes a Movie", notes = "Deletes a movie from the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully deleted"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)    
     
 	// this deletes single movie using Pathvariable
 	@RequestMapping(value = "/api/deleteMovie/{id}", method = RequestMethod.DELETE)
@@ -158,6 +231,16 @@ public class MovieRestController {
 //		}
 //
 //	}
+	
+	//second customization
+	@ApiOperation(value = "Deletes a Person", notes = "Deletes a person from the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully deleted"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 
 	// this deletes single Person using Pathvariable
 	@RequestMapping(value = "/api/deletePerson/{id}", method = RequestMethod.DELETE)
@@ -169,6 +252,16 @@ public class MovieRestController {
 
 	}
 	
+	//second customization
+	@ApiOperation(value = "Deletes a User", notes = "Deletes a user from the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully deleted"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
+	
 	// this deletes single User using Pathvariable
 	@RequestMapping(value = "/api/deleteUser/{id}", method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable(name = "id", required = true) int id) {
@@ -178,6 +271,16 @@ public class MovieRestController {
 		// Anything in the body will get ignored
 
 	}
+	
+	//second customization
+	@ApiOperation(value = "Get a person", notes = "Returns people from the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully returned people"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	
 //	Get Person using @Query
 	@RequestMapping(value = "/api/getPersonQuery2", method = RequestMethod.GET)
@@ -190,9 +293,19 @@ public class MovieRestController {
 		return result;
 	}
 	
+	//second customization
+	@ApiOperation(value = "Get a Movie", notes = "Returns information about a movie")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Movies successfully retrieved"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
+	
 	// Get function using @Query.
 	@RequestMapping(value = "/api/getMovieQuery2", method = RequestMethod.GET)
-	@ApiOperation(value = "Get a Movie", notes = "Returns information about a movie")
+//	@ApiOperation(value = "Get a Movie", notes = "Returns information about a movie")
 	public List<Movie> getMovieQuery(@RequestParam(defaultValue = "") String movie,
 			@RequestParam(defaultValue = "0") Integer year, @RequestParam(defaultValue = "") String rating,
 			@RequestParam(defaultValue = "0") Integer score, @RequestParam(defaultValue = "") String genre,
@@ -204,6 +317,17 @@ public class MovieRestController {
 		System.out.println("result" + result);
 		return result;
 	}
+	
+	//second customization
+	@ApiOperation(value = "Get a user", notes = "Get a user from the database")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successfully retrieved list of users"),
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
+	
 //	Get User using @Query
 	@RequestMapping(value = "/api/getUserQuery2", method = RequestMethod.GET)
 	public List<User> getUserQuery(@RequestParam(defaultValue = "") String name,

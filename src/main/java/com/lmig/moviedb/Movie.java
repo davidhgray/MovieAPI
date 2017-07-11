@@ -32,12 +32,14 @@ public class Movie implements Serializable {
 	@Id
 	@GeneratedValue
 	int id;
-
+//third customization
 	@ApiModelProperty(value = "Title of the movie", required = true)
 	String movie;
+	@ApiModelProperty(value = "Movie Year", required = true)
 	int year;
 	String genre;
 	String rating;
+	@ApiModelProperty(value = "Score", required = true)
 	int score;
 	String language;
 	String person;
