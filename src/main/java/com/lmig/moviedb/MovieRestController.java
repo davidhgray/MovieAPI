@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.lmig.moviedb.MovieRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 //import com.google.gson.Gson;
 
 @RestController
@@ -190,6 +192,7 @@ public class MovieRestController {
 	
 	// Get function using @Query.
 	@RequestMapping(value = "/api/getMovieQuery2", method = RequestMethod.GET)
+	@ApiOperation(value = "Get a Movie", notes = "Returns information about a movie")
 	public List<Movie> getMovieQuery(@RequestParam(defaultValue = "") String movie,
 			@RequestParam(defaultValue = "0") Integer year, @RequestParam(defaultValue = "") String rating,
 			@RequestParam(defaultValue = "0") Integer score, @RequestParam(defaultValue = "") String genre,

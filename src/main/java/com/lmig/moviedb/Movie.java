@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.JoinColumn;
 
 
@@ -31,6 +33,7 @@ public class Movie implements Serializable {
 	@GeneratedValue
 	int id;
 
+	@ApiModelProperty(value = "Title of the movie", required = true)
 	String movie;
 	int year;
 	String genre;
