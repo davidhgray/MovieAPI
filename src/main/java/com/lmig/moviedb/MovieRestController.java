@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -95,7 +96,8 @@ public class MovieRestController {
 	@RequestMapping(value = "/api/addMovie", method = RequestMethod.POST)
 //	added the @ResponseBody as part of JUnit testing
 	@ResponseBody
-	public HttpStatus addMovie(@RequestBody Movie movie) {
+//	added the @Valid tag as part of validation
+	public HttpStatus addMovie(@Valid @RequestBody Movie movie) {
 		if (movie == null) {
 			 return HttpStatus.BAD_REQUEST;
 		}
@@ -115,7 +117,8 @@ public class MovieRestController {
 	)
 	
     @RequestMapping(path = "/api/putMovie", method = RequestMethod.PUT)
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie m) {  
+//	added the @Valid tag as part of validation
+    public ResponseEntity<Movie> updateMovie(@Valid @RequestBody Movie m) {  
         System.out.println(" PUT/api/movie id is" + m.getId());
         if (m.getId() == 0) {
             return new ResponseEntity<Movie>(HttpStatus.BAD_REQUEST);

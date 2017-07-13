@@ -1,6 +1,7 @@
 package com.lmig.moviedb;
 
 import java.io.Serializable;
+import java.lang.annotation.Repeatable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.h2.util.New;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,8 +41,17 @@ public class Movie implements Serializable {
 	int id;
 //third customization
 	@ApiModelProperty(value = "Title of the movie", required = true)
+	
+	//added @NotNull as part of validation exercise
+	@NotNull //(groups = New.class)
+	@Size(min = 1, max = 40)
 	String movie;
 	@ApiModelProperty(value = "Movie Year", required = true)
+	
+	//added @NotNull, @Min, and @Max as part of validation exercise
+	@Min(1900)
+	@Max(2025)
+	@NotNull
 	int year;
 	String genre;
 	String rating;
