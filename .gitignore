@@ -25,5 +25,6 @@ nbdist/
 
 ### hibernate database files ###
 *.db
+
 pom.xml
 application.properties
