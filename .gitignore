@@ -26,5 +26,6 @@ nbdist/
 ### hibernate database files ###
 *.db
 
-pom.xml
-application.properties
+###for the purposes of the heroku deploy, i am unignoring these two items###
+###pom.xml###
+###application.properties###
