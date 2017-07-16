@@ -31,12 +31,12 @@ public class User implements Serializable {
 //	Date dateJoined;
 
 //	still in testing phase
-	@ManyToMany(cascade=CascadeType.ALL)
-	private Set<Movie> movies;
-
+//	@ManyToMany(cascade=CascadeType.ALL)
+//	private Set<Movie> movies;
+//
 	public User() {
-//		still in testing phase
-		this.movies = new HashSet<Movie>();
+////		still in testing phase
+//		this.movies = new HashSet<Movie>();
 	}
 
 	public User(String name, String location) {
@@ -79,13 +79,13 @@ public class User implements Serializable {
 //	}
 
 //still in testing phase
-	public Set<Movie> getMovies() {
-		return movies;
-	}
-
-	public void setMovies(Set<Movie> movies) {
-		this.movies = movies;
-	}
+//	public Set<Movie> getMovies() {
+//		return movies;
+//	}
+//
+//	public void setMovies(Set<Movie> movies) {
+//		this.movies = movies;
+//	}
 
     //PUT method
     public void merge(User other) {
