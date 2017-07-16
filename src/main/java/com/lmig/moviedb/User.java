@@ -19,6 +19,12 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	int id;
