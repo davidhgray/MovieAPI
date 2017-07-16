@@ -39,7 +39,7 @@ public class User implements Serializable {
 		this.movies = new HashSet<Movie>();
 	}
 
-	public User(String name, String location, Date dateJoined) {
+	public User(String name, String location) {
 		this();
 		this.name = name;
 		this.location = location;
