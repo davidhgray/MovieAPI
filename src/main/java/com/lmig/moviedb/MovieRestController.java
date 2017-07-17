@@ -75,7 +75,7 @@ public class MovieRestController {
 	)
 	
 	@RequestMapping(value = "/api/addUser", method = RequestMethod.POST)
-	public HttpStatus addUser(@RequestBody User user) {
+	public HttpStatus addUser(@RequestBody AppUser user) {
 		if (user == null) {
 			 return HttpStatus.BAD_REQUEST;
 		}
@@ -168,15 +168,15 @@ public class MovieRestController {
 	)
 	
     @RequestMapping(path = "/api/putUser", method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@RequestBody User u) {  
+    public ResponseEntity<AppUser> updateUser(@RequestBody AppUser u) {  
         System.out.println(" PUT/api/user id is" + u.getId());
         if (u.getId() == 0) {
-            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<AppUser>(HttpStatus.BAD_REQUEST);
         }
         System.out.println(userRepository.findById(u.getId()));
-        User existing = userRepository.findById(u.getId());
+        AppUser existing = userRepository.findById(u.getId());
         if (existing == null) {
-			return new ResponseEntity<User>(existing, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<AppUser>(existing, HttpStatus.NOT_FOUND);
 		}
         System.out.println(existing.name);
 //        existing.name="david";
@@ -184,7 +184,7 @@ public class MovieRestController {
         userRepository.save(existing);
         System.out.println("");
         System.out.println("ok 2");
-        return new ResponseEntity<User>(existing, HttpStatus.OK);
+        return new ResponseEntity<AppUser>(existing, HttpStatus.OK);
     }
 	
 	//second customization
@@ -333,12 +333,12 @@ public class MovieRestController {
 	
 //	Get User using @Query
 	@RequestMapping(value = "/api/getUserQuery2", method = RequestMethod.GET)
-	public List<User> getUserQuery(@RequestParam(defaultValue = "") String name,
+	public List<AppUser> getUserQuery(@RequestParam(defaultValue = "") String name,
 			@RequestParam(defaultValue = "") String location
 //			, @RequestParam(defaultValue = "") Date dateJoined
 			) 
 	{
-		List<User> result = new ArrayList<>();
+		List<AppUser> result = new ArrayList<>();
 		result = userRepository.search(name, location
 //				, dateJoined
 				);

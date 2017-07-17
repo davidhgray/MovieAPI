@@ -18,7 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "app_user")
-public class User implements Serializable {
+public class AppUser implements Serializable {
 	
 	/**
 	 * 
@@ -40,12 +40,12 @@ public class User implements Serializable {
 //	@ManyToMany(cascade=CascadeType.ALL)
 //	private Set<Movie> movies;
 //
-	public User() {
+	public AppUser() {
 ////		still in testing phase
 //		this.movies = new HashSet<Movie>();
 	}
 
-	public User(String name, String location) {
+	public AppUser(String name, String location) {
 		this();
 		this.name = name;
 		this.location = location;
@@ -94,7 +94,7 @@ public class User implements Serializable {
 //	}
 
     //PUT method
-    public void merge(User other) {
+    public void merge(AppUser other) {
         if (other.location != null) {
             this.location = other.location;
         }

@@ -2,7 +2,7 @@
 
 package com.lmig.moviedb;
 
-import com.lmig.moviedb.User;
+import com.lmig.moviedb.AppUser;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -13,15 +13,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<AppUser, Integer> {
 	
-	User findById(Integer id);
+	AppUser findById(Integer id);
 	
 	@Query("SELECT u FROM User u WHERE u.name LIKE CONCAT('%', :name, '%') "
 			+ " AND ('' = :location OR u.location = :location) "
 //			+ " AND ('' = :dateJoined OR u.dateJoined = :dateJoined) "
 			)
-	List<User> search(@Param("name") String Name, @Param("location") String Location
+	List<AppUser> search(@Param("name") String Name, @Param("location") String Location
 //			, @Param("dateJoined") Date DateJoined
 			);
 }
