@@ -29,3 +29,4 @@ nbdist/
 ###for the purposes of the heroku deploy, i am unignoring these two items###
 ###pom.xml###
 ###application.properties###
+/src/main/resources/application-dev.properties
